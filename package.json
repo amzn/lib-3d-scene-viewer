@@ -1,0 +1,83 @@
+{
+  "name": "@amazon/lib-3d-scene-viewer",
+  "version": "1.0.0",
+  "description": "The library for setting up a 3D scene viewer",
+  "scripts": {
+    "build": "rimraf dist && npm run lint && tsc -b tsconfig.json && npm run copy-files",
+    "clean": "rimraf node_modules dist coverage docs",
+    "copy-files": "cpy public/* package.json LICENSE README.md THIRD_PARTY_LICENSES dist",
+    "docs": "typedoc src/index.ts",
+    "format": "eslint '**/*.{ts,tsx}' --fix",
+    "lint": "eslint '**/*.{ts,tsx}' --quiet",
+    "pack:dist": "npm run build && npm run test && npm run docs && cd dist && npm pack && cd ..",
+    "server": "webpack serve",
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest --verbose",
+    "update-bjs-ver": "node ./scripts/updateBabylonjsVersion.js"
+  },
+  "author": "Amazon",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/amzn/lib-3d-scene-viewer.git"
+  },
+  "files": [
+    "**/*.js",
+    "**/*.d.ts",
+    "**/*.map",
+    "public/**/*",
+    "LICENSE",
+    "README.md",
+    "THIRD_PARTY_LICENSES"
+  ],
+  "engines": {
+    "npm": ">=10.0.0",
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@babylonjs/inspector": "7.34.2",
+    "@types/jest": "^29.5.13",
+    "@typescript-eslint/eslint-plugin": "^8.7.0",
+    "@typescript-eslint/parser": "^8.7.0",
+    "compression-webpack-plugin": "^11.1.0",
+    "cpy-cli": "^5.0.0",
+    "css-loader": "^7.1.2",
+    "draco3dgltf": "1.5.7",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-typescript": "^3.6.3",
+    "eslint-plugin-import": "^2.30.0",
+    "eslint-plugin-import-path": "^0.0.2",
+    "eslint-plugin-prettier": "^5.2.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.6.0",
+    "jest": "^29.7.0",
+    "jest-canvas-mock": "^2.5.2",
+    "jest-environment-jsdom": "^29.7.0",
+    "nock": "^13.5.5",
+    "prettier": "3.3.3",
+    "rimraf": "^4.4.1",
+    "style-loader": "^4.0.0",
+    "ts-jest": "^29.2.5",
+    "ts-loader": "^9.5.1",
+    "typedoc": "^0.26.8",
+    "typescript": "~5.5.0",
+    "webpack": "^5.94.0",
+    "webpack-bundle-analyzer": "^4.10.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.2"
+  },
+  "dependencies": {
+    "@babylonjs/core": "7.34.2",
+    "@babylonjs/gui": "7.34.2",
+    "@babylonjs/loaders": "7.34.2",
+    "@babylonjs/materials": "7.34.2",
+    "convex-hull": "1.0.3",
+    "deepmerge-ts": "4.3.0"
+  },
+  "peerDependencies": {
+    "@babylonjs/core": "^7.34.2",
+    "@babylonjs/gui": "^7.34.2",
+    "@babylonjs/loaders": "^7.34.2",
+    "@babylonjs/materials": "^7.34.2"
+  }
+}

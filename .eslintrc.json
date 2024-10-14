@@ -1,0 +1,37 @@
+{
+    "ignorePatterns": ["/*", "!/src", "!/test"],
+    "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["import", "@typescript-eslint", "import-path"],
+    "rules": {
+        "@typescript-eslint/ban-ts-comment": "warn",
+        "@typescript-eslint/member-ordering": "error",
+        "@typescript-eslint/no-explicit-any": "warn",
+        "@typescript-eslint/no-unused-vars": "warn",
+        "arrow-body-style": "off",
+        "prefer-arrow-callback": "off",
+        "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }],
+        "import/order": [
+            "error",
+            {
+                "newlines-between": "always",
+                "alphabetize": { "order": "asc", "caseInsensitive": true }
+            }
+        ],
+        "import-path/forbidden": ["error", [
+            {
+                "match": "^@babylonjs/(core|gui|loaders|materials)$",
+                "message": "Use full path to benefit from tree-shaking, https://doc.babylonjs.com/setup/frameworkPackages/es6Support#tree-shaking. For example, 'import { Engine } from \"@babylonjs/core/Engines/engine\";'"
+            }
+        ]],
+        "prettier/prettier": [
+            "error",
+            {
+                "printWidth": 120,
+                "tabWidth": 4,
+                "singleQuote": true,
+                "trailingComma": "all"
+            }
+        ]
+    }
+}

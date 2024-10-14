@@ -1,0 +1,37 @@
+{
+    "preset": "ts-jest/presets/default-esm",
+    "testEnvironment": "jsdom",
+    "setupFiles": ["jest-canvas-mock"],
+    "moduleDirectories": [
+        "node_modules",
+        "src"
+    ],
+    "transform": {
+        "^.+\\.tsx?$": [
+            "ts-jest",
+            {
+                "useESM": true,
+                "tsconfig": {
+                    "esModuleInterop": true
+                }
+            }
+        ]
+    },
+    "collectCoverage": true,
+    "coverageReporters": [
+        "cobertura",
+        "lcov",
+        "json-summary",
+        "html",
+        "text"
+    ],
+    "coverageThreshold": {
+        "global": {
+            "branches": 75,
+            "functions": 85,
+            "lines": 85,
+            "statements": 85
+        }
+    },
+    "coverageDirectory": "coverage"
+}
