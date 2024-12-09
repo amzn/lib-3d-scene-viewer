@@ -47,9 +47,9 @@ import { V3DScene } from '@amazon/lib-3d-scene-viewer/scene/v3dScene';
     const v3dScene = new V3DScene(canvas, V3D_CONFIG, {
         // Override file paths if needed
         lightingConfig: {
-            MainHDRLight: {
+            StudioSide3Top1: {
                 type: 'env',
-                filePath: 'public/ibl/Directional_colorVariationOnTopBlur100_512.env',
+                filePath: 'public/ibl/Studio_Side3Top1_256.env',
             },
         },
         basisTranscoder: {
