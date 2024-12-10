@@ -10,6 +10,8 @@
     "format": "eslint '**/*.{ts,tsx}' --fix",
     "lint": "eslint '**/*.{ts,tsx}' --quiet",
     "pack:dist": "npm run build && npm run test && npm run docs && cd dist && npm pack && cd ..",
+    "prepublishOnly": "echo '\"npm publish\" is disabled. Please use \"npm run publish:dist\" to publish the package.' && exit 1",
+    "publish:dist": "node ./scripts/publish.js",
     "server": "webpack serve",
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest --verbose",
     "update-bjs-ver": "node ./scripts/updateBabylonjsVersion.js"

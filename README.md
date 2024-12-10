@@ -194,6 +194,7 @@ The following scripts are available:
 | `npm run docs`           | Create API documentation                                                                    |
 | `npm run lint`           | Run ESLint                                                                                  |
 | `npm run pack:dist`      | Build the project and create an npm tarball under `dist` folder                             |
+| `npm run publish:dist`   | Publish the npm tarball                                                                     |
 | `npm run server`         | Run a web server and open a new browser tab pointed to [src/dev/index.ts](src/dev/index.ts) |
 | `npm run test`           | Run tests                                                                                   |
 | `npm run update-bjs-ver` | Update BabylonJS dependencies to a specific version                                         |
