@@ -36,15 +36,10 @@ import { Tools } from '@babylonjs/core/Misc/tools';
 import { IDisposable } from '@babylonjs/core/scene';
 import { Scene } from '@babylonjs/core/scene';
 import { Nullable } from '@babylonjs/core/types';
-import {
-    registerGLTFExtension,
-    unregisterGLTFExtension,
-} from '@babylonjs/loaders/glTF/2.0/glTFLoaderExtensionRegistry';
 import { GLTFFileLoader } from '@babylonjs/loaders/glTF/glTFFileLoader';
 import { deepmerge } from 'deepmerge-ts';
 
 import { Config } from '../config/config';
-import { KHR_INTERACTIVITY_EXTENSION_NAME, KHR_interactivity } from '../loaderExtensions/KHR_interactivity';
 import { ObservableManager } from '../manager/observableManager';
 import { SceneManager } from '../manager/sceneManager';
 import { Model } from '../model/model';
@@ -357,11 +352,7 @@ export abstract class AbstractScene implements IDisposable {
     /**
      * Registers gltfLoaderExtensions which are enabled in the extensionConfig
      */
-    protected _registerGLTFLoaderExtensions() {
-        if (!this._initialConfig.extensionConfig || this._initialConfig.extensionConfig.khrBehaviorsEnabled !== false) {
-            this._setUpKHRBehaviors();
-        }
-    }
+    protected _registerGLTFLoaderExtensions() {}
 
     /**
      * Create the engine. Returns a promise in case async calls are needed.
@@ -513,13 +504,6 @@ export abstract class AbstractScene implements IDisposable {
                 decoder: decoder,
             };
         }
-    }
-
-    private _setUpKHRBehaviors(): void {
-        unregisterGLTFExtension(KHR_INTERACTIVITY_EXTENSION_NAME);
-        registerGLTFExtension(KHR_INTERACTIVITY_EXTENSION_NAME, true, (loader) => {
-            return new KHR_interactivity(loader);
-        });
     }
 
     private _createFilesInput(config: Config): FilesInput {

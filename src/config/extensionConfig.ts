@@ -14,10 +14,4 @@
  * limitations under the License.
  */
 
-export interface ExtensionConfig {
-    /**
-     * Define if the scene should use the experimental KHR_interactivity extension
-     * @default true
-     */
-    khrBehaviorsEnabled?: boolean;
-}
+export type ExtensionConfig = object;

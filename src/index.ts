@@ -17,7 +17,6 @@
 export * from './camera/index';
 export * from './config/index';
 export * from './lighting/index';
-export * from './loaderExtensions/index';
 export * from './manager/index';
 export * from './material/index';
 export * from './model/index';
