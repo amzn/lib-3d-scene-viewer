@@ -129,7 +129,7 @@ export abstract class AbstractScene implements IDisposable {
 
     /**
      * Gets a camera using its name
-     * @param cameraName defines the camera's name
+     * @param cameraName - defines the camera's name
      * @returns the camera or null if none found.
      */
     public getCamera(cameraName: string): Nullable<Camera> {
@@ -167,7 +167,7 @@ export abstract class AbstractScene implements IDisposable {
 
     /**
      * Asynchronously update the scene's configuration, including camera, lights, environment, etc.
-     * @param newConfig the delta that should be configured. This includes only the changes.
+     * @param newConfig - the delta that should be configured. This includes only the changes.
      */
     public async updateConfig(newConfig: Partial<Config>): Promise<void> {
         if (this.sceneManager) {
@@ -290,7 +290,7 @@ export abstract class AbstractScene implements IDisposable {
     /**
      * Register a new action to be preformed after a gltf/glb scene file has been loaded
      *
-     * @param action a function which takes a scene as input and preforms some process after it has been loaded
+     * @param action - a function which takes a scene as input and preforms some process after it has been loaded
      * then returns void
      */
     public registerPostSceneFileLoadedAction = (action: (scene: Scene) => void) => {

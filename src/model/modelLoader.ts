@@ -96,14 +96,6 @@ export class ModelLoader implements IDisposable {
                 // Use HTTP range requests to load the glTF binary (GLB) in parts.
                 loader.useRangeRequests = !isBase64 && !isBlobUrl;
 
-                /* For debugging MSFT_lod extension */
-                // loader.loggingEnabled = true;
-                // loader.onExtensionLoadedObservable.add(function (extension) {
-                //     if (extension.name === 'MSFT_lod' && extension instanceof MSFT_lod) {
-                //         extension.maxLODsToLoad = 1;
-                //     }
-                // });
-
                 if (disableAnimation) {
                     loader.animationStartMode = GLTFLoaderAnimationStartMode.NONE;
                 }

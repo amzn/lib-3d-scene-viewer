@@ -153,7 +153,7 @@ export class SceneManager implements IDisposable {
 
     /**
      * This will update the scene's configuration, including camera, lights, environment, etc.
-     * @param newConfig the delta that should be configured. This includes only the changes.
+     * @param newConfig - defines the delta that should be configured. This includes only the changes.
      */
     public async updateConfig(newConfig: Partial<Config>): Promise<void> {
         this._config = deepmerge(this.config, newConfig);

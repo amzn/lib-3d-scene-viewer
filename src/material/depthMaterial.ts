@@ -28,6 +28,9 @@ const DEPTH_MAT_NAME = 'Depth';
 const VD_DARKNESS = 'vdDarkness';
 const VD_GAMMA = 'vdGamma';
 
+/**
+ * Material with depth plugin
+ */
 export class DepthPluginMaterial extends MaterialPluginBase {
     private _enabled: boolean;
 
@@ -35,6 +38,10 @@ export class DepthPluginMaterial extends MaterialPluginBase {
 
     private _gamma: number;
 
+    /**
+     * Instantiate a new {@link DepthPluginMaterial}
+     * @param material - base Material to wrap
+     */
     public constructor(material: Material) {
         super(material, DEPTH_MAT_NAME, 200, { DEPTH_MAT: false });
         this._enabled = false;
@@ -93,7 +100,7 @@ export class DepthPluginMaterial extends MaterialPluginBase {
 
     /**
      * Sets the defines for the next rendering
-     * @param defines the list of "defines" to update.
+     * @param defines - the list of "defines" to update.
      */
     public override prepareDefines(defines: MaterialDefines): void {
         defines.DEPTH_MAT = this._enabled;
@@ -101,6 +108,7 @@ export class DepthPluginMaterial extends MaterialPluginBase {
 
     /**
      * Gets the uniforms for the shader
+     * @returns the description of the uniforms
      */
     public override getUniforms(): Uniforms {
         return {
@@ -118,7 +126,7 @@ export class DepthPluginMaterial extends MaterialPluginBase {
 
     /**
      * Binds the material data.
-     * @param uniformBuffer defines the Uniform buffer to fill in.
+     * @param uniformBuffer - defines the Uniform buffer to fill in.
      */
     public override bindForSubMesh(uniformBuffer: UniformBuffer): void {
         if (this._enabled) {
@@ -129,7 +137,7 @@ export class DepthPluginMaterial extends MaterialPluginBase {
 
     /**
      * Returns a list of custom shader code fragments to customize the shader.
-     * @param shaderType "vertex" or "fragment"
+     * @param shaderType - "vertex" or "fragment"
      * @returns a list of pointName =\> code.
      * Note that `pointName` can also be a regular expression if it starts with a `!`.
      * In that case, the string found by the regular expression (if any) will be

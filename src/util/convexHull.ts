@@ -16,10 +16,17 @@
 
 import { Vector3 } from '@babylonjs/core/Maths/math.vector';
 import { FloatArray } from '@babylonjs/core/types';
-// @ts-ignore
 import getConvexHull from 'convex-hull';
 
+/**
+ * Class for computing the convex hull of vertices
+ */
 export class ConvexHull {
+    /**
+     * Compute the faces of the convex hull
+     * @param allVertices - position of all vertices
+     * @returns a list of faces. A face consists of a list of vertex indices.
+     */
     public static getFaces(allVertices: Array<Vector3>): Array<Array<number>> {
         return getConvexHull(
             allVertices.map((vertex) => {
@@ -30,6 +37,11 @@ export class ConvexHull {
         );
     }
 
+    /**
+     * Compute the indices of the vertices of the convex hull
+     * @param allVertices - position of all vertices
+     * @returns a list of vertex indices
+     */
     public static getVertexIndices(allVertices: Array<Vector3>): Array<number> {
         const faces = ConvexHull.getFaces(allVertices);
         const indices = faces.reduce((acc, val) => {
@@ -40,6 +52,11 @@ export class ConvexHull {
         return Array.from(uniqueIndexSet.values());
     }
 
+    /**
+     * Compute the vertices of the convex hull
+     * @param allVertices - position of all vertices
+     * @returns a list of vertices
+     */
     public static getVertices(allVertices: Array<Vector3>): Array<Vector3> {
         return ConvexHull.getVertexIndices(allVertices).map((index) => allVertices[index]);
     }

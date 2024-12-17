@@ -96,7 +96,7 @@ import { V3DScene } from '@amazon/lib-3d-scene-viewer/scene/v3dScene';
     });
 
     v3dScene.observableManager.onModelLoadedObservable.add((model) => {
-        model.showShadowOnGround(0.3, 120, true, 0.15, 1);
+        model.showShadowOnGroundDepthMap();
         model.moveCenterToTargetCoordinate();
 
         const radius = 2 * Math.max(...model.getOverallBoundingBoxDimensions().asArray());

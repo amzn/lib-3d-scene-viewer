@@ -54,8 +54,10 @@ function createCanvas(): HTMLCanvasElement {
 
     v3dScene.observableManager.onModelLoadedObservable.add((model) => {
         console.log(`Bounding box dimensions: ${model.getOverallBoundingBoxDimensions()}`);
+
         model.showShadowOnGroundDepthMap();
         model.moveCenterToTargetCoordinate();
+
         const radius = 2 * Math.max(...model.getOverallBoundingBoxDimensions().asArray());
         v3dScene.updateConfig({
             cameraConfig: {

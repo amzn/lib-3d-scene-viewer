@@ -19,7 +19,7 @@ import { Animation } from '@babylonjs/core/Animations/animation';
 import { EasingFunction } from '@babylonjs/core/Animations/easing';
 import { ArcRotateCamera } from '@babylonjs/core/Cameras/arcRotateCamera';
 import { Camera as BabylonCamera } from '@babylonjs/core/Cameras/camera';
-import { Scalar } from '@babylonjs/core/Maths/math.scalar';
+import { DeltaAngle } from '@babylonjs/core/Maths/math.scalar.functions';
 import { Matrix, Vector3 } from '@babylonjs/core/Maths/math.vector';
 import { Observer } from '@babylonjs/core/Misc/observable';
 import { Tools } from '@babylonjs/core/Misc/tools';
@@ -388,8 +388,7 @@ export class Camera implements IDisposable {
         if (minimizeRotation) {
             if (typeof endVal === 'number' && (key === 'alpha' || key === 'beta')) {
                 startVal = startVal as number;
-                endVal =
-                    startVal + Tools.ToRadians(Scalar.DeltaAngle(Tools.ToDegrees(startVal), Tools.ToDegrees(endVal)));
+                endVal = startVal + Tools.ToRadians(DeltaAngle(Tools.ToDegrees(startVal), Tools.ToDegrees(endVal)));
             }
         }
 
