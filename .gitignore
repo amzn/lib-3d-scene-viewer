@@ -1,0 +1,10 @@
+.vscode
+*.swp
+.DS_Store
+lib
+node_modules
+dist
+.idea
+coverage
+*.tgz
+docs
