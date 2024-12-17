@@ -1,7 +1,7 @@
 {
   "name": "@amazon/lib-3d-scene-viewer",
   "version": "1.0.0",
-  "description": "The library for setting up a 3D scene viewer",
+  "description": "This package provides preset configurations for quickly setting up a 3D scene viewer.",
   "scripts": {
     "build": "rimraf dist && npm run lint && tsc -b tsconfig.json && npm run copy-files",
     "clean": "rimraf node_modules dist coverage docs",
@@ -20,7 +20,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/amzn/lib-3d-scene-viewer.git"
+    "url": "https://github.com/amzn/lib-3d-scene-viewer"
   },
   "files": [
     "**/*.js",

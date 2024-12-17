@@ -39,4 +39,4 @@ delete packageJson.scripts['prepublishOnly'];
 fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
 // Publish
-execSync(`npm publish ${distFolder}`, { stdio: 'inherit' });
+execSync(`npm publish ${distFolder} --access public`, { stdio: 'inherit' });
