@@ -23,13 +23,13 @@ import { Config } from '../config';
 import { LightingConfig } from '../lightingConfig';
 
 export const V3D_LIGHTING: LightingConfig = {
-    StudioSide3Top1: {
+    DirectionalBlur: {
         type: 'env',
         enable: true,
         gammaSpace: false,
-        filePath: 'public/ibl/Studio_Side3Top1_256.env',
-        intensity: 1.25,
-        textureMatrix: Matrix.RotationY(Tools.ToRadians(111)),
+        filePath: 'public/ibl/Directional_colorVariationOnTopBlur100_512.env',
+        intensity: 1.6,
+        textureMatrix: Matrix.RotationY(Tools.ToRadians(344)),
     },
 };
 
