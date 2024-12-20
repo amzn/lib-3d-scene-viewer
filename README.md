@@ -1,10 +1,23 @@
 # lib-3d-scene-viewer
 
-![npm version](https://img.shields.io/badge/npm_package-1.0.0-green)
+![NPM Version](https://img.shields.io/npm/v/%40amazon%2Flib-3d-scene-viewer?color=green)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 **lib-3d-scene-viewer** is a package based on [Babylon.js](https://www.babylonjs.com/).
 It provides preset configurations for quickly setting up a 3D scene viewer.
+
+
+## Table of Contents
+
+- [Getting Started](#getting-started)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Resource](#resource)
+  - [Config](#config)
+- [Documentation](#documentation)
+- [Development](#development)
+- [Contributing](#contributing)
+- [License](#license)
 
 
 ## Getting Started
@@ -47,9 +60,9 @@ import { V3DScene } from '@amazon/lib-3d-scene-viewer/scene/v3dScene';
     const v3dScene = new V3DScene(canvas, V3D_CONFIG, {
         // Override file paths if needed
         lightingConfig: {
-            StudioSide3Top1: {
+            DirectionalBlur: {
                 type: 'env',
-                filePath: 'public/ibl/Studio_Side3Top1_256.env',
+                filePath: 'public/ibl/Directional_colorVariationOnTopBlur100_512.env',
             },
         },
         basisTranscoder: {
@@ -167,6 +180,11 @@ The full config parameters and default values can be found in [Config](src/confi
 
 It also provides preset config files in [preset](src/config/preset) folder 
 or `@amazon/lib-3d-scene-viewer/config/preset`.
+
+
+## Documentation
+
+- [API Docs](https://amzn.github.io/lib-3d-scene-viewer)
 
 
 ## Development

@@ -1,6 +1,6 @@
 {
   "name": "@amazon/lib-3d-scene-viewer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This package provides preset configurations for quickly setting up a 3D scene viewer.",
   "scripts": {
     "build": "rimraf dist && npm run lint && tsc -b tsconfig.json && npm run copy-files",
@@ -22,6 +22,14 @@
     "type": "git",
     "url": "https://github.com/amzn/lib-3d-scene-viewer"
   },
+  "keywords": [
+    "3d",
+    "webgl",
+    "webgl2",
+    "javascript",
+    "canvas",
+    "amazon"
+  ],
   "files": [
     "**/*.js",
     "**/*.d.ts",
