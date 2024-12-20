@@ -265,7 +265,7 @@ export abstract class AbstractScene implements IDisposable {
 
     /**
      * Turn on/off a specific lighting rig
-     * @param lightingName - the name of lighting, i.e. the key in {@link LightingConfig}
+     * @param lightingName - the name of lighting, i.e. the key in {@link Config.lightingConfig}
      * @param visible - force the lighting to be visible or invisible
      */
     public toggleLighting(lightingName: string, visible?: boolean): void {
