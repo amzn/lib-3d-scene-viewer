@@ -25,7 +25,7 @@ if (fs.existsSync(distFolder)) {
 }
 
 // Install dependencies
-execSync('npm install', { stdio: 'inherit' });
+execSync('npm ci', { stdio: 'inherit' });
 
 // Build and pack
 execSync('npm run pack:dist', { stdio: 'inherit' });
