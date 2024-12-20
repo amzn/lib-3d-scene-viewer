@@ -29,10 +29,13 @@
       "es2015.symbol.wellknown"
     ],
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": "./src"
   },
   "typedocOptions": {
-    "entryPoints": ["src/index.ts"],
+    "entryPoints": ["src"],
+    "entryPointStrategy": "expand",
+    "exclude": "**/*+(index|.d).ts",
+    "excludeReferences": true,
     "out": "docs"
   },
   "include": ["./src/**/*"],

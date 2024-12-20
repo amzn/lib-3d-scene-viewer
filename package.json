@@ -6,7 +6,7 @@
     "build": "rimraf dist && npm run lint && tsc -b tsconfig.json && npm run copy-files",
     "clean": "rimraf node_modules dist coverage docs",
     "copy-files": "cpy public/* package.json LICENSE README.md THIRD_PARTY_LICENSES dist",
-    "docs": "typedoc src/index.ts",
+    "docs": "typedoc",
     "format": "eslint '**/*.{ts,tsx}' --fix",
     "lint": "eslint '**/*.{ts,tsx}' --quiet",
     "pack:dist": "npm run build && npm run test && npm run docs && cd dist && npm pack && cd ..",
