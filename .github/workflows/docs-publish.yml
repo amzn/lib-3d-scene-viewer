@@ -40,7 +40,7 @@ jobs:
           LATEST_TAG=$(git tag -l --sort=-v:refname | head -n 1)
           echo "Latest tag is $LATEST_TAG"
           echo "Current tag is $GITHUB_REF_NAME"
-          if [ "${GITHUB_REF_NAME}" != "${LATEST_TAG}" ];
+          if [ "${GITHUB_REF_NAME}" != "${LATEST_TAG}" ]; then
             echo "Not the latest tag, skipping deploy."
             exit 0
           else
