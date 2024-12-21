@@ -39,6 +39,7 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v4
         with:
+          fetch-tags: true
           ref: ${{ steps.fetch_latest_release_tag.outputs.LATEST_TAG }}
 
       - name: Set up Node.js
