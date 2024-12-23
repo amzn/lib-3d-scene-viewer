@@ -97,7 +97,7 @@ export interface CameraBaseProperty {
 
     /**
      * The Camera Animation Configuration groups the different settings used to define the camera animation behavior
-     * @default {@link DEFAULT_CAMERA_ANIMATION_CONFIG}
+     * @default {@link config/cameraAnimationConfig.DEFAULT_CAMERA_ANIMATION_CONFIG}
      */
     cameraAnimationConfig?: CameraAnimationConfig;
 
