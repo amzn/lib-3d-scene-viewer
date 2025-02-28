@@ -44,7 +44,7 @@
     "node": ">=18.0.0"
   },
   "devDependencies": {
-    "@babylonjs/inspector": "7.34.2",
+    "@babylonjs/inspector": "7.49.0",
     "@types/jest": "^29.5.13",
     "@typescript-eslint/eslint-plugin": "^8.7.0",
     "@typescript-eslint/parser": "^8.7.0",
@@ -77,17 +77,17 @@
     "webpack-dev-server": "^4.15.2"
   },
   "dependencies": {
-    "@babylonjs/core": "7.34.2",
-    "@babylonjs/gui": "7.34.2",
-    "@babylonjs/loaders": "7.34.2",
-    "@babylonjs/materials": "7.34.2",
+    "@babylonjs/core": "7.49.0",
+    "@babylonjs/gui": "7.49.0",
+    "@babylonjs/loaders": "7.49.0",
+    "@babylonjs/materials": "7.49.0",
     "convex-hull": "1.0.3",
     "deepmerge-ts": "4.3.0"
   },
   "peerDependencies": {
-    "@babylonjs/core": "^7.34.2",
-    "@babylonjs/gui": "^7.34.2",
-    "@babylonjs/loaders": "^7.34.2",
-    "@babylonjs/materials": "^7.34.2"
+    "@babylonjs/core": "^7.49.0",
+    "@babylonjs/gui": "^7.49.0",
+    "@babylonjs/loaders": "^7.49.0",
+    "@babylonjs/materials": "^7.49.0"
   }
 }
