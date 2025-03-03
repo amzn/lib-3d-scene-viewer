@@ -1,6 +1,6 @@
 {
   "name": "@amazon/lib-3d-scene-viewer",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "This package provides preset configurations for quickly setting up a 3D scene viewer.",
   "scripts": {
     "build": "rimraf dist && npm run lint && tsc -b tsconfig.json && npm run copy-files",
