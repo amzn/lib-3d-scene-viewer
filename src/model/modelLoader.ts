@@ -17,11 +17,10 @@
 import '@babylonjs/core/Materials/Textures/Loaders/basisTextureLoader';
 import '@babylonjs/core/Materials/Textures/Loaders/ktxTextureLoader';
 import '@babylonjs/loaders/glTF';
-import { AssetContainer } from '@babylonjs/core/assetContainer';
-import { SceneLoader } from '@babylonjs/core/Loading/sceneLoader';
+import { LoadAssetContainerAsync, LoadAssetContainerOptions } from '@babylonjs/core/Loading/sceneLoader';
 import { AbstractMesh } from '@babylonjs/core/Meshes/abstractMesh';
 import { IDisposable } from '@babylonjs/core/scene';
-import { GLTFFileLoader, GLTFLoaderAnimationStartMode } from '@babylonjs/loaders/glTF/glTFFileLoader';
+import { GLTFLoaderAnimationStartMode } from '@babylonjs/loaders/glTF/glTFFileLoader';
 
 import { ObservableManager } from '../manager/observableManager';
 import { SceneManager } from '../manager/sceneManager';
@@ -74,16 +73,12 @@ export class ModelLoader implements IDisposable {
             throw Error('No glTF content or url provided');
         }
 
-        let rootUrl = url;
-        let contents = '';
         let pluginExtension = '.glb';
         let isBase64 = false;
         let isBlobUrl = false;
         const extensionRegEx = /\.(glb|gltf|babylon|obj|stl)$/;
 
         if (url.startsWith('data:')) {
-            rootUrl = '';
-            contents = url;
             isBase64 = true;
         } else if (url.startsWith('blob:')) {
             isBlobUrl = true;
@@ -91,46 +86,49 @@ export class ModelLoader implements IDisposable {
             pluginExtension = url.toLowerCase().match(extensionRegEx)?.at(0) ?? pluginExtension;
         }
 
-        SceneLoader.OnPluginActivatedObservable.addOnce(function (loader) {
-            if (loader.name === 'gltf' && loader instanceof GLTFFileLoader) {
-                // Use HTTP range requests to load the glTF binary (GLB) in parts.
-                loader.useRangeRequests = !isBase64 && !isBlobUrl;
+        const loadAssetContainerOptions: LoadAssetContainerOptions = {
+            pluginOptions: {
+                gltf: {
+                    // Use HTTP range requests to load the glTF binary (GLB) in parts.
+                    useRangeRequests: !isBase64 && !isBlobUrl,
+                    extensionOptions: {
+                        /* For debugging MSFT_lod extension */
+                        // MSFT_lod: {
+                        //     maxLODsToLoad: 1,
+                        // },
+                    },
+                },
+            },
+            pluginExtension: pluginExtension,
+        };
 
-                if (disableAnimation) {
-                    loader.animationStartMode = GLTFLoaderAnimationStartMode.NONE;
-                }
+        if (disableAnimation) {
+            loadAssetContainerOptions.pluginOptions!.gltf!.animationStartMode = GLTFLoaderAnimationStartMode.NONE;
+        }
 
-                if (options?.targetFps) {
-                    loader.targetFps = options.targetFps;
-                }
-            }
-        });
+        if (options?.targetFps) {
+            loadAssetContainerOptions.pluginOptions!.gltf!.targetFps = options.targetFps;
+        }
+
+        /* For debugging MSFT_lod extension */
+        // SceneLoader.OnPluginActivatedObservable.addOnce(function (loader) {
+        //     if (loader.name === 'gltf' && loader instanceof GLTFFileLoader) {
+        //         loader.loggingEnabled = true;
+        //     }
+        // });
 
         if (this._sceneManager.config.sceneConfig?.useLoadingUI) {
             this._sceneManager.scene.getEngine().displayLoadingUI();
         }
 
-        const sceneLoaderAsyncResult = await SceneLoader.ImportMeshAsync(
-            '',
-            rootUrl,
-            contents,
-            this._sceneManager.scene,
-            undefined,
-            pluginExtension,
-        );
+        const container = await LoadAssetContainerAsync(url, this._sceneManager.scene, loadAssetContainerOptions);
+
+        // Add everything from the container into the scene
+        container.addAllToScene();
 
         if (this._sceneManager.config.sceneConfig?.useLoadingUI) {
             this._sceneManager.scene.getEngine().hideLoadingUI();
         }
-
-        const container = new AssetContainer(this._sceneManager.scene);
-        container.meshes = sceneLoaderAsyncResult.meshes;
-        container.lights = sceneLoaderAsyncResult.lights;
-        container.geometries = sceneLoaderAsyncResult.geometries;
-        container.skeletons = sceneLoaderAsyncResult.skeletons;
-        container.particleSystems = sceneLoaderAsyncResult.particleSystems;
-        container.animationGroups = sceneLoaderAsyncResult.animationGroups;
-        container.transformNodes = sceneLoaderAsyncResult.transformNodes;
 
         // Avoid frustum clipping for all meshes
         container.meshes.forEach((mesh: AbstractMesh) => {
