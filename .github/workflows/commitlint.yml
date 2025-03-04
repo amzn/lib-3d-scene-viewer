@@ -1,6 +1,6 @@
 name: Run commitlint on git commit messages
 
-on: [push, pull_request]
+on: [push, pull_request, merge_group]
 
 jobs:
   commitlint:
