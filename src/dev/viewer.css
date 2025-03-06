@@ -12,3 +12,14 @@ canvas {
     height: 100%;
     z-index: 10;
 }
+
+#helperTextDiv {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: medium;
+    font-family: "DejaVu Sans Mono for Powerline", monospace;
+    white-space: pre-line;
+    line-height: 1.5;
+}

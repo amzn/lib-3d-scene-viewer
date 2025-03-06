@@ -44,9 +44,14 @@ const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
 
 // Update peerDependencies with the installed version
 const currentVersion = packageJson.dependencies['@babylonjs/core'];
+const currentMajorVersion = parseInt(currentVersion.split('.')[0], 10);
 packageJson.peerDependencies = packageJson.peerDependencies ?? {};
 for (const packageName of dependencies) {
-    packageJson.peerDependencies[packageName] = `^${currentVersion}`;
+    packageJson.peerDependencies[packageName] = `>= ${currentVersion} < ${currentMajorVersion + 1}`;
     fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2));
     console.log(`Updated peerDependencies: ${packageName} to version ${currentVersion}`);
 }
+
+// Update package-lock.json
+console.log('Updating package-lock.json');
+execSync('npm install', { stdio: 'inherit' });

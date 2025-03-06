@@ -8,3 +8,4 @@ dist
 coverage
 *.tgz
 docs
+web

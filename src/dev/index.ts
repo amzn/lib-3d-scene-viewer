@@ -25,10 +25,12 @@ function createButton(name: string, url: string) {
     button.onclick = () => {
         window.open(url, '_blank');
     };
+    button.style.marginBottom = '5px';
     div.appendChild(button);
     document.body.appendChild(div);
 }
 
 (function () {
-    createButton('3D scene viewer', '/v3dViewer');
+    createButton('3D scene viewer', './v3dViewer.html');
+    createButton('API docs', './docs/index.html');
 })();

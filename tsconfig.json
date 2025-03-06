@@ -39,5 +39,5 @@
     "out": "docs"
   },
   "include": ["./src/**/*"],
-  "exclude": ["./src/dev/**/*", "**/node_modules", "**/dist"]
+  "exclude": ["./src/dev/**/*", "**/node_modules", "**/dist", "**/web"]
 }
