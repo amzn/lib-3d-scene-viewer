@@ -15,7 +15,8 @@
     "publish:dist": "node ./scripts/publish.js",
     "server": "webpack serve",
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest --verbose",
-    "update-bjs-ver": "node ./scripts/updateBabylonjsVersion.js"
+    "update-bjs-ver": "node ./scripts/updateBabylonjsVersion.js",
+    "webpack": "webpack --env production"
   },
   "author": "Amazon",
   "license": "Apache-2.0",
@@ -51,7 +52,7 @@
     "@types/jest": "^29.5.13",
     "@typescript-eslint/eslint-plugin": "^8.7.0",
     "@typescript-eslint/parser": "^8.7.0",
-    "compression-webpack-plugin": "^11.1.0",
+    "copy-webpack-plugin": "^13.0.0",
     "cpy-cli": "^5.0.0",
     "css-loader": "^7.1.2",
     "draco3dgltf": "1.5.7",
@@ -76,7 +77,6 @@
     "typedoc": "^0.26.8",
     "typescript": "~5.5.0",
     "webpack": "^5.94.0",
-    "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.2"
   },
