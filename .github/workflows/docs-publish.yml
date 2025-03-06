@@ -53,10 +53,16 @@ jobs:
       - name: Build docs
         run: npm run docs
 
+      - name: Run webpack
+        run: npm run webpack
+
+      - name: Create .nojekyll file
+        run: touch web/.nojekyll
+
       - name: Upload static files as artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs/
+          path: web/
 
   deploy:
     needs: build

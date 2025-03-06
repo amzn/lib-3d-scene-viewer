@@ -4,7 +4,8 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 **lib-3d-scene-viewer** is a package based on [Babylon.js](https://www.babylonjs.com/).
-It provides preset configurations for quickly setting up a 3D scene viewer.
+It provides preset configurations for quickly setting up a 3D scene viewer, 
+which offers a 3D environment similar to the "View in 3D" CX on Amazon Product Detail Pages.
 
 
 ## Table of Contents
@@ -14,6 +15,7 @@ It provides preset configurations for quickly setting up a 3D scene viewer.
   - [Usage](#usage)
   - [Resource](#resource)
   - [Config](#config)
+- [Sandbox](#sandbox)
 - [Documentation](#documentation)
 - [Development](#development)
 - [Contributing](#contributing)
@@ -182,9 +184,14 @@ It also provides preset config files in [preset](src/config/preset) folder
 or `@amazon/lib-3d-scene-viewer/config/preset`.
 
 
+## Sandbox
+
+Try loading GLB/GLTF models into the [Sandbox](https://amzn.github.io/lib-3d-scene-viewer/v3dViewer.html).
+
+
 ## Documentation
 
-- [API Docs](https://amzn.github.io/lib-3d-scene-viewer)
+- [API Docs](https://amzn.github.io/lib-3d-scene-viewer/docs/index.html)
 
 
 ## Development
