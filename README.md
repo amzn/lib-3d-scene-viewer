@@ -223,6 +223,7 @@ The following scripts are available:
 | `npm run server`         | Run a web server and open a new browser tab pointed to [src/dev/index.ts](src/dev/index.ts) |
 | `npm run test`           | Run tests                                                                                   |
 | `npm run update-bjs-ver` | Update BabylonJS dependencies to a specific version                                         |
+| `npm run webpack`        | Generate static web resources for sandbox and API docs                                      |
 
 
 ## Contributing
