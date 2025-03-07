@@ -17,6 +17,7 @@
 import '@babylonjs/core/Materials/Textures/Loaders/basisTextureLoader';
 import '@babylonjs/core/Materials/Textures/Loaders/ktxTextureLoader';
 import '@babylonjs/loaders/glTF';
+import { AssetContainer } from '@babylonjs/core/assetContainer';
 import { LoadAssetContainerAsync, LoadAssetContainerOptions } from '@babylonjs/core/Loading/sceneLoader';
 import { AbstractMesh } from '@babylonjs/core/Meshes/abstractMesh';
 import { IDisposable } from '@babylonjs/core/scene';
@@ -121,7 +122,18 @@ export class ModelLoader implements IDisposable {
             this._sceneManager.scene.getEngine().displayLoadingUI();
         }
 
-        const container = await LoadAssetContainerAsync(url, this._sceneManager.scene, loadAssetContainerOptions);
+        let container: AssetContainer;
+        try {
+            container = await LoadAssetContainerAsync(url, this._sceneManager.scene, loadAssetContainerOptions);
+        } catch (error) {
+            // Fallback to full download on range request failure
+            if (error instanceof Error && error.message.includes('RangeError')) {
+                loadAssetContainerOptions.pluginOptions!.gltf!.useRangeRequests = false;
+                container = await LoadAssetContainerAsync(url, this._sceneManager.scene, loadAssetContainerOptions);
+            } else {
+                throw error;
+            }
+        }
 
         // Add everything from the container into the scene
         container.addAllToScene();
