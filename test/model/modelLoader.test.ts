@@ -46,6 +46,7 @@ describe('ModelLoader', () => {
     });
 
     afterEach(() => {
+        nock.cleanAll();
         modelLoader?.dispose();
         sceneManager?.dispose();
         observableManager?.dispose();
@@ -89,6 +90,22 @@ describe('ModelLoader', () => {
         await modelLoader?.loadGltf('http://localhost/public/model/mannequin.glb', true);
 
         expect(sceneManager?.models.size).toBe(1);
-        nock.restore();
+    });
+
+    it('should be able to load glb asset with full download when HTTP range requests failed', async () => {
+        const data = fs.readFileSync('public/model/mannequin.glb');
+        nock('http://localhost')
+            .get('/public/model/mannequin.glb')
+            .matchHeader('range', 'bytes=0-19')
+            .reply(206, Buffer.from(''), {
+                'content-Range': 'bytes 0-19/760664',
+                'content-length': '20',
+            })
+            .get('/public/model/mannequin.glb')
+            .reply(200, data);
+
+        await modelLoader?.loadGltf('http://localhost/public/model/mannequin.glb', true);
+
+        expect(sceneManager?.models.size).toBe(1);
     });
 });
