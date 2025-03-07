@@ -38,8 +38,6 @@ npm install @amazon/lib-3d-scene-viewer
 [Take a look at an example](src/dev/v3dViewer.ts)
 
 ```ts
-// Needed for BabylonJS debug layer
-import '@babylonjs/inspector';
 import { Config } from '@amazon/lib-3d-scene-viewer/config/config';
 import { Model } from '@amazon/lib-3d-scene-viewer/model/model';
 import { Scene } from '@babylonjs/core/scene';
@@ -161,7 +159,10 @@ import { V3DScene } from '@amazon/lib-3d-scene-viewer/scene/v3dScene';
         const key = event.key;
         // Pressing '?' should show/hide the debug layer
         if (key === '?') {
-            v3dScene.toggleDebugMode();
+            // Needed for BabylonJS debug layer
+            import('@babylonjs/inspector').then(() => {
+                v3dScene.toggleDebugMode();
+            });
         }
     });
 })();
@@ -223,6 +224,7 @@ The following scripts are available:
 | `npm run server`         | Run a web server and open a new browser tab pointed to [src/dev/index.ts](src/dev/index.ts) |
 | `npm run test`           | Run tests                                                                                   |
 | `npm run update-bjs-ver` | Update BabylonJS dependencies to a specific version                                         |
+| `npm run webpack`        | Generate static web resources for sandbox and API docs                                      |
 
 
 ## Contributing

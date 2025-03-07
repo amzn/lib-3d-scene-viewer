@@ -39,6 +39,11 @@ export default (env, argv) => {
             filename: '[name].bundle.js',
             clean: true,
         },
+        optimization: {
+            splitChunks: {
+                chunks: 'all',
+            },
+        },
         resolve: {
             extensions: ['.tsx', '.js', '.ts'],
         },
