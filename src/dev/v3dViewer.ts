@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import '@babylonjs/inspector';
 import { CubicEase } from '@babylonjs/core/Animations/easing';
 import { Vector3 } from '@babylonjs/core/Maths/math.vector';
 import { DracoCompression } from '@babylonjs/core/Meshes/Compression/dracoCompression';
@@ -156,7 +155,9 @@ function createHelperText(): HTMLDivElement {
         const key = event.key;
         // Pressing '?' should show/hide the debug layer
         if (key === '?') {
-            v3dScene.toggleDebugMode();
+            import('@babylonjs/inspector').then(() => {
+                v3dScene.toggleDebugMode();
+            });
         }
     });
 })();
