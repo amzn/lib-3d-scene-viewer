@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.2
+- fix: fallback to full download on HTTP range request failure ([#13](https://github.com/amzn/lib-3d-scene-viewer/pull/13))
+- docs: lazy load @babylonjs/inspector ([#14](https://github.com/amzn/lib-3d-scene-viewer/pull/14))
+
 ## 1.1.1
 - ci: add a GitHub workflow to run continuous integration tests ([#10](https://github.com/amzn/lib-3d-scene-viewer/pull/10))
 - docs: add sandbox to GitHub pages ([#11](https://github.com/amzn/lib-3d-scene-viewer/pull/11))
