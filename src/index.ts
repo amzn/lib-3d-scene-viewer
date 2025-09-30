@@ -24,5 +24,4 @@ export * from './scene/index';
 export * from './util/index';
 
 // Export new utilities and examples
-export * from './util/performanceOptimizer';
 export * from './examples/advancedModelLoading';
