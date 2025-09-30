@@ -22,3 +22,6 @@ export * from './material/index';
 export * from './model/index';
 export * from './scene/index';
 export * from './util/index';
+
+// Export new utilities and examples
+export * from './examples/advancedModelLoading';
