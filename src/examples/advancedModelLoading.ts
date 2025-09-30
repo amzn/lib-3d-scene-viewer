@@ -32,14 +32,12 @@ import { V3DScene } from '../scene/v3dScene';
  */
 export class AdvancedModelLoadingExample {
     private v3dScene: V3DScene;
-    private canvas: HTMLCanvasElement;
 
     /**
      * Initialize the 3D scene viewer with advanced configuration
      * @param canvas - HTML canvas element for rendering
      */
     constructor(canvas: HTMLCanvasElement) {
-        this.canvas = canvas;
 
         // Enhanced configuration with performance optimizations
         const enhancedConfig: Config = {
@@ -47,14 +45,13 @@ export class AdvancedModelLoadingExample {
             sceneConfig: {
                 ...V3D_CONFIG.sceneConfig,
                 useLoadingUI: true,
-                // Enable performance optimizations
-                optimizeForPerformance: true,
             },
             cameraConfig: {
                 ...V3D_CONFIG.cameraConfig,
                 // Optimize camera for large models
                 ArcRotateCamera: {
                     ...V3D_CONFIG.cameraConfig?.ArcRotateCamera,
+                    type: 'arcRotateCamera',
                     wheelPrecision: 0.1,
                     pinchPrecision: 0.1,
                 },
@@ -114,7 +111,7 @@ export class AdvancedModelLoadingExample {
             onError?: (error: Error) => void;
         } = {},
     ): Promise<Model> {
-        const { timeout = 30000, showProgress = true, onProgress, onError } = options;
+        const { showProgress = true, onError } = options;
 
         // Set up progress tracking UI
         if (showProgress) {
@@ -123,12 +120,6 @@ export class AdvancedModelLoadingExample {
 
         // Enhanced loading options
         const loadOptions: LoadGltfOptions = {
-            timeout,
-            showProgress,
-            onProgress: (progress: number) => {
-                this.updateProgressUI(progress);
-                onProgress?.(progress);
-            },
             targetFps: 60, // Optimize for 60fps
         };
 
