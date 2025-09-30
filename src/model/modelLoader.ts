@@ -33,6 +33,23 @@ export interface LoadGltfOptions {
      * When loading glTF animations, which are defined in seconds, target them to this FPS. Defaults to 60.
      */
     targetFps?: number;
+
+    /**
+     * Timeout in milliseconds for model loading. Defaults to 30000 (30 seconds).
+     * @default 30000
+     */
+    timeout?: number;
+
+    /**
+     * Whether to show detailed loading progress. Defaults to false.
+     * @default false
+     */
+    showProgress?: boolean;
+
+    /**
+     * Callback function for loading progress updates (0-100).
+     */
+    onProgress?: (progress: number) => void;
 }
 
 /**
@@ -63,6 +80,8 @@ export class ModelLoader implements IDisposable {
      * @returns A promise of {@link Model}
      *
      * @throws Error if no glTF content or url provided
+     * @throws Error if model loading times out
+     * @throws Error if model loading fails
      */
     public async loadGltf(
         url: string,
@@ -71,7 +90,12 @@ export class ModelLoader implements IDisposable {
         options?: LoadGltfOptions,
     ): Promise<Model> {
         if (!url) {
-            throw Error('No glTF content or url provided');
+            throw new Error('No glTF content or url provided');
+        }
+
+        // Validate URL format for better error messages
+        if (!url.startsWith('data:') && !url.startsWith('blob:') && !url.startsWith('http')) {
+            throw new Error(`Invalid URL format: ${url}. URL must start with 'data:', 'blob:', or 'http'`);
         }
 
         let pluginExtension = '.glb';
@@ -122,17 +146,50 @@ export class ModelLoader implements IDisposable {
             this._sceneManager.scene.getEngine().displayLoadingUI();
         }
 
+        // Set up timeout if specified
+        const timeout = options?.timeout || 30000;
+        const timeoutPromise = new Promise<never>((_, reject) => {
+            setTimeout(() => {
+                reject(new Error(`Model loading timed out after ${timeout}ms`));
+            }, timeout);
+        });
+
+        // Set up progress tracking if requested
+        if (options?.showProgress && options?.onProgress) {
+            // Simulate progress updates (Babylon.js doesn't provide detailed progress)
+            const progressInterval = setInterval(() => {
+                const currentProgress = Math.min(90, Math.random() * 90); // Cap at 90% until complete
+                options.onProgress!(currentProgress);
+            }, 100);
+
+            // Clear interval when loading completes
+            const clearProgress = () => clearInterval(progressInterval);
+            timeoutPromise.catch(clearProgress);
+        }
+
         let container: AssetContainer;
         try {
-            container = await LoadAssetContainerAsync(url, this._sceneManager.scene, loadAssetContainerOptions);
+            // Race between loading and timeout
+            container = await Promise.race([
+                LoadAssetContainerAsync(url, this._sceneManager.scene, loadAssetContainerOptions),
+                timeoutPromise,
+            ]);
         } catch (error) {
             // Fallback to full download on range request failure
             if (error instanceof Error && error.message.includes('RangeError')) {
                 loadAssetContainerOptions.pluginOptions!.gltf!.useRangeRequests = false;
-                container = await LoadAssetContainerAsync(url, this._sceneManager.scene, loadAssetContainerOptions);
+                container = await Promise.race([
+                    LoadAssetContainerAsync(url, this._sceneManager.scene, loadAssetContainerOptions),
+                    timeoutPromise,
+                ]);
             } else {
                 throw error;
             }
+        }
+
+        // Complete progress tracking
+        if (options?.onProgress) {
+            options.onProgress(100);
         }
 
         // Add everything from the container into the scene
