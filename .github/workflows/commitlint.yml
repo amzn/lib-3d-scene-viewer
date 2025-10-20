@@ -2,6 +2,10 @@ name: Run commitlint on git commit messages
 
 on: [push, pull_request, merge_group]
 
+
+permissions:
+  contents: read
+
 jobs:
   commitlint:
     runs-on: ubuntu-latest
