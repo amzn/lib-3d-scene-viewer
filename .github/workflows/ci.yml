@@ -2,6 +2,10 @@ name: Run continuous integration tests
 
 on: [push, pull_request, merge_group]
 
+
+permissions:
+  contents: read
+
 jobs:
   ci:
     runs-on: ubuntu-latest
